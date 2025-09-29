@@ -1,0 +1,195 @@
+/* CSS com tons de rosa claro e marsala */
+
+:root {
+  --rosa-claro: #f8d7da;      /* rosa claro suave */
+  --marsala: #800000;         /* marsala (vinho escuro) */
+  --marsala-claro: #a05252;   /* marsala mais claro para detalhes */
+  --cinza-escuro: #4b3a3a;    /* cinza escuro para texto */
+  --cinza-claro: #f5f0f0;     /* cinza muito claro para fundo */
+}
+
+body {
+  background-color: var(--rosa-claro);
+  color: var(--cinza-escuro);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: var(--marsala);
+  color: var(--rosa-claro);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+header p {
+  font-style: italic;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+nav {
+  background-color: var(--marsala-claro);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 0;
+  font-weight: 600;
+}
+
+nav a {
+  color: var(--rosa-claro);
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: var(--marsala);
+  box-shadow: 0 0 8px var(--marsala);
+}
+
+main {
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
+}
+
+section {
+  background-color: var(--rosa-claro);
+  border-radius: 1rem;
+  box-shadow: 0 6px 18px rgba(128, 0, 0, 0.15);
+  padding: 2.5rem 2rem;
+  flex: 1 1 450px;
+  max-width: 550px;
+}
+
+section h2 {
+  color: var(--marsala);
+  border-bottom: 3px solid var(--marsala);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.produto {
+  margin-bottom: 2rem;
+}
+
+.produto img {
+  max-width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 4px 14px rgba(128, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.produto h3 {
+  color: var(--marsala);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.produto p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cinza-escuro);
+}
+
+.quiz-question {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--marsala);
+}
+
+.quiz-options {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 2rem;
+}
+
+.quiz-options li {
+  margin-bottom: 1rem;
+}
+
+.quiz-options label {
+  display: block;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--marsala);
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--cinza-escuro);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.quiz-options input[type="radio"] {
+  display: none;
+}
+
+.quiz-options input[type="radio"]:checked + label {
+  background-color: var(--marsala);
+  color: var(--rosa-claro);
+  border-color: var(--marsala);
+  box-shadow: 0 0 10px var(--marsala);
+}
+
+button#submit-quiz {
+  background-color: var(--marsala);
+  color: var(--rosa-claro);
+  border: none;
+  padding: 1.1rem 3rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+button#submit-quiz:hover {
+  background-color: #5a0000; /* tom mais escuro */
+  box-shadow: 0 0 12px #5a0000;
+}
+
+#quiz-result {
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--marsala);
+  text-align: center;
+}
+
+footer {
+  background-color: var(--marsala);
+  color: var(--rosa-claro);
+  padding: 1.3rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+/* Responsividade */
+
+@media (max-width: 980px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+  section {
+    max-width: 100%;
+  }
+}
