@@ -1,0 +1,71 @@
+import React, { useState, useEffect } from 'react';
+import QuizManager from './QuizManager';
+import ResultPage from './ResultPage';
+
+const apiURL = 'https://api.amani.com/quiz/diagnose';
+
+const QuizApp = () => {
+  const [quizManager] = useState(() => new QuizManager(apiURL, { maxRetries: 3 }));
+  const [step, setStep] = useState(1);
+  const [answers, setAnswers] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [result, setResult] = useState(null);
+
+  useEffect(() => {
+    quizManager.on('onProgress', (newStep, newAnswers) => {
+      setStep(newStep);
+      setAnswers({...newAnswers});
+    });
+
+    quizManager.on('onResult', (diagnosis) => {
+      setResult(diagnosis);
+      setLoading(false);
+    });
+
+    quizManager.on('onError', (err) => {
+      setError(err.message || 'Erro inesperado');
+      setLoading(false);
+    });
+
+    quizManager.on('onLoading', setLoading);
+
+    return () => {
+      quizManager.off('onProgress');
+      quizManager.off('onResult');
+      quizManager.off('onError');
+      quizManager.off('onLoading');
+    };
+  }, [quizManager]);
+
+  const handleNext = (questaoId, valorResposta) => {
+    try {
+      quizManager.guardarResposta(questaoId, valorResposta);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleFinish = () => {
+    setError(null);
+    quizManager.finalizarQuiz();
+  };
+
+  if (loading) return <div>Carregando...</div>;
+
+  if (error) return (
+    <div role="alert">
+      <p>{error}</p>
+      <button onClick={() => setError(null)}>Fechar</button>
+    </div>
+  );
+
+  if (result) {
+    return <ResultPage diagnosisData={result} onRetry={() => setResult(null)} />;
+  }
+
+  return (
+    <div>
+      {/* Seu componente que renderiza perguntas com o handleNext e handleFinish */}
+      <p>Passo atual: {step}</p>
+      {/* Implementar

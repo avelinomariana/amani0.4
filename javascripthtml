@@ -1,0 +1,72 @@
+// ResultPage.js
+import React, { useState, useEffect, Suspense } from 'react';
+import PropTypes from 'prop-types';
+
+// Lazy loading para alta performance
+const ProductCard = React.lazy(() => import('./ProductCard'));
+const EfficacyInfographic = React.lazy(() => import('./EfficacyInfographic'));
+
+const ResultPage = ({ diagnosisData, onRetry }) => {
+  const { diagnostico_detalhado, produto_recomendado, alegacao_anvisa } = diagnosisData || {};
+
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  // Placeholder para imagem carregada com lazy loading
+  const handleImageLoad = () => setIsImageLoaded(true);
+
+  if (!diagnosisData) {
+    return (
+      <div role="alert" className="error-state">
+        <p>Dados do diagnóstico indisponíveis.</p>
+        {onRetry && (
+          <button onClick={onRetry} aria-label="Tentar novamente">Tentar novamente</button>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="quiz-result-container" aria-live="polite">
+      <section className="diagnosis-summary" tabIndex={-1}>
+        <h2>O Resultado Amani: Seu Diagnóstico Detalhado</h2>
+        <p className="detailed-report">{diagnostico_detalhado}</p>
+        <p className="call-to-action">
+          Com base na sua necessidade, este é o tratamento recomendado:
+        </p>
+      </section>
+
+      <Suspense fallback={<div>Carregando produto...</div>}>
+        <ProductCard 
+          product={produto_recomendado} 
+          onImageLoad={handleImageLoad}
+          showLoading={!isImageLoaded}
+        />
+      </Suspense>
+
+      <Suspense fallback={<div>Carregando infográfico...</div>}>
+        <EfficacyInfographic 
+          alegacao={alegacao_anvisa} 
+          tags={produto_recomendado?.tags_eficacia || []} 
+        />
+      </Suspense>
+    </div>
+  );
+};
+
+ResultPage.propTypes = {
+  diagnosisData: PropTypes.shape({
+    diagnostico_detalhado: PropTypes.string.isRequired,
+    produto_recomendado: PropTypes.shape({
+      nome: PropTypes.string,
+      descricao: PropTypes.string,
+      preco: PropTypes.string,
+      imagem: PropTypes.string,
+      tags_eficacia: PropTypes.arrayOf(PropTypes.string)
+    }).isRequired,
+    alegacao_anvisa: PropTypes.string.isRequired
+  }),
+  onRetry: PropTypes.func
+};
+
+export default ResultPage;
+  
