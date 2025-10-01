@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz - Amani Cosméticos</title>
+  <style>
+    /* Reset e base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #fff8f8;
+      color: #444;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #b97a7a;
+      color: #fff;
+      padding: 25px 15px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(185, 122, 122, 0.4);
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      font-family: 'Georgia', serif;
+    }
+    header p {
+      font-size: 1.1rem;
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    nav {
+      background: #9b6060;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 15px 0;
+      font-weight: 600;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background: #7a4444;
+    }
+
+    main {
+      flex: 1;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 0 15px;
+      background: white;
+      box-shadow: 0 6px 20px rgba(185, 122, 122, 0.2);
+      border-radius: 12px;
+      padding: 30px 25px;
+    }
+
+    h2 {
+      color: #b97a7a;
+      margin-bottom: 18px;
+      border-bottom: 3px solid #b97a7a;
+      padding-bottom: 10px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .quiz-question {
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      color: #b97a7a;
+    }
+    .quiz-options {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 20px;
+    }
+    .quiz-options li {
+      margin-bottom: 12px;
+    }
+    .quiz-options label {
+      display: block;
+      padding: 12px 18px;
+      border: 2px solid #b97a7a;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      color: #444;
+    }
+    .quiz-options input[type="radio"] {
+      display: none;
+    }
+    .quiz-options input[type="radio"]:checked + label {
+      background-color: #b97a7a;
+      color: white;
+      border-color: #944747;
+    }
+
+    button#submit-quiz {
+      background-color: #b97a7a;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    button#submit-quiz:hover {
+      background-color: #944747;
+    }
+
+    #quiz-result {
+      margin-top: 25px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #6a4a4a;
+      text-align: center;
+      min-height: 70px;
+    }
+
+    footer {
+      background: #b97a7a;
+      color: white;
+      padding: 18px 10px;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    /* Responsividade */
+    @media (max-width: 480px) {
+      main {
+        padding: 20px 15px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .quiz-question {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Amani Cosméticos</h1>
+    <p>Qual Produto Amani é Ideal para Você?</p>
+  </header>
+
+  <nav>
+    <a href="index.html#produtos">Produtos</a>
+    <a href="quiz.html" aria-current="page">Quiz</a>
+  </nav>
+
+  <main>
+    <h2>Descubra seu Produto Ideal</h2>
+    <form id="quiz-form">
+      <div class="quiz-question">
+        1. Qual é sua principal necessidade no momento?
+      </div>
+      <ul class="quiz-options">
+        <li>
+          <input type="radio" id="need1" name="need" value="perfume" required />
+          <label for="need1">Quero uma fragrância delicada para o dia a dia</label>
+        </li>
+        <li>
+          <input type="radio" id="need2" name="need" value="creme" />
+          <label for="need2">Preciso cuidar e hidratar meus pés cansados</label>
+        </li>
+        <li>
+          <input type="radio" id="need3" name="need" value="ambos" />
+          <label for="need3">Quero tanto perfume quanto cuidado para os pés</label>
+        </li>
+      </ul>
+
+      <div class="quiz-question">
+        2. Qual cheiro você prefere?
+      </div>
+      <ul class="quiz-options">
+        <li>
+          <input type="radio" id="smell1" name="smell" value="rosas" required />
+          <label for="smell1">Rosas Brancas suaves e elegantes</label>
+        </li>
+        <li>
+          <input type="radio" id="smell2" name="smell" value="alecrim" />
+          <label for="smell2">Aroma fresco e revitalizante de alecrim</label>
+        </li>
+        <li>
+          <input type="radio" id="smell3" name="smell" value="ambos" />
+          <label for="smell3">Gosto dos dois aromas igualmente</label>
+        </li>
+      </ul>
+
+      <div class="quiz-question">
+        3. Como você prefere aplicar seus produtos de beleza?
+      </div>
+      <ul class="quiz-options">
+        <li>
+          <input type="radio" id="apply1" name="apply" value="perfume" required />
+          <label for="apply1">Gosto de aplicar perfume em creme nas mãos e corpo</label>
+        </li>
+        <li>
+          <input type="radio" id="apply2" name="apply" value="creme" />
+          <label for="apply2">Prefiro cremes hidratantes para áreas específicas como os pés</label>
+        </li>
+        <li>
+          <input type="radio" id="apply3" name="apply" value="ambos" />
+          <label for="apply3">Uso ambos os tipos de produtos</label>
+        </li>
+      </ul>
+
+      <button type="submit" id="submit-quiz">Descobrir Produto Ideal</button>
+    </form>
+    <div id="quiz-result" role="region" aria-live="polite"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 Amani Cosméticos - Cuidado natural para sua beleza e bem-estar</p>
+  </footer>
+
+  <script>
+    const quizForm = document.getElementById('quiz-form');
+    const quizResult = document.getElementById('quiz-result');
+
+    quizForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Pega as respostas
+      const formData = new FormData(quizForm);
+      const need = formData.get('need');
+      const smell = formData.get('smell');
+      const apply = formData.get('apply');
+
+      // Função para calcular o produto ideal
+      const scores = {
+        perfume: 0,
+        creme: 0
+      };
+
+      // Função para atribuir pontuação simples
+      function pontuar(resposta) {
+        if (resposta === 'perfume') scores.perfume++;
+        else if (resposta === 'creme') scores.creme++;
+        else if (resposta === 'ambos') {
+          scores.perfume++;
+          scores.creme++;
+        }
+        else if (resposta === 'rosas') scores.perfume++;
+        else if (resposta === 'alecrim') scores.creme++;
+        else if (resposta === 'ambos') {
+          scores.perfume++;
+          scores.creme++;
+        }
+      }
+
+      pontuar(need);
+      pontuar(smell);
+      pontuar(apply);
+
+      // Definir resultado baseado na maior pontuação
+      let resultado = '';
+      if (scores.perfume > scores.creme) {
+        resultado = `
+          <strong>Produto Ideal:</strong> Perfume em Creme de Rosas Brancas<br/>
+          Uma fragrância suave e sofisticada que vai conquistar você!
+        `;
+      } else if (scores.creme > scores.perfume) {
+        resultado = `
+          <strong>Produto Ideal:</strong> Creme para os Pés de Rosas Brancas e Alecrim<br/>
+          Hidratação profunda e refrescante para aliviar o cansaço dos seus pés.
+        `;
+      } else {
+        resultado = `
+          <strong>Produto Ideal:</strong> Você combina com os dois produtos da Amani!<br/>
+          Aproveite a fragrância delicada e o cuidado intensivo para os pés.
+        `;
+      }
+
+      quizResult.innerHTML = resultado;
+      quizResult.scrollIntoView({behavior: 'smooth'});
+    });
+  </script>
+</body>
+</html>
